@@ -37,8 +37,13 @@ public class Pocitac {
     }
 
     public void zapniSe() {
+        if (this.getRam() != null && this.getCpu() != null && this.getPevnyDisk() != null) {
         this.jeZapnuty = true;
-        System.out.println("Pocitac se zapnul.");
+        System.out.println("Pocitac se zapnul."); }
+        else {
+            System.err.println("Nemuzes zapnout pocitac, kdyz vsechny tri komponenty.");
+
+        }
     }
 
     public void vypniSe() {
@@ -54,7 +59,7 @@ public class Pocitac {
 
     public void vytvorSouborOVelikosti(long velikost) {
         long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() + velikost;
-        if (vysledneVyuziteMisto < this.pevnyDisk.getKapacita())
+        if (this.jeZapnuty && vysledneVyuziteMisto < this.pevnyDisk.getKapacita())
             this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
         else
             System.err.println("Nemuzes ukladat takto velky soubor, protoze se nevejde.");
@@ -62,7 +67,7 @@ public class Pocitac {
 
     public void vymazSouboryOVelikosti(long velikost) {
         long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() - velikost;
-        if (vysledneVyuziteMisto > 0)
+        if (this.jeZapnuty && vysledneVyuziteMisto > 0)
             this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
         else
             System.err.println("Nemuzes smazat vic mista, nez tam je.");

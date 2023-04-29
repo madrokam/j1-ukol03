@@ -31,13 +31,8 @@ public class HlavniProgram {
 
         System.out.println(kamilinPocitac.toString());
 
-        if (kamilinPocitac.getRam() != null && kamilinPocitac.getCpu() != null && kamilinPocitac.getPevnyDisk() != null && kamilinPocitac.jeZapnuty() == false) {
-            kamilinPocitac.zapniSe();
-            System.out.println("Pocitace je zapnuty: " + kamilinPocitac.jeZapnuty());
-        } else {
-            System.err.println("Nemuzes zapnout pocitac, kdyz vsechny tri komponenty.");
+        kamilinPocitac.zapniSe();
 
-        }
 
         System.out.println(kamilinPocitac.getPevnyDisk().getVyuziteMisto());
         kamilinPocitac.vytvorSouborOVelikosti(1000); //demonstrace nechybove metody
