@@ -38,9 +38,9 @@ public class Pocitac {
 
     public void zapniSe() {
         if (this.getRam() != null && this.getCpu() != null && this.getPevnyDisk() != null) {
-        this.jeZapnuty = true;
-        System.out.println("Pocitac se zapnul."); }
-        else {
+            this.jeZapnuty = true;
+            System.out.println("Pocitac se zapnul.");
+        } else {
             System.err.println("Nemuzes zapnout pocitac, kdyz vsechny tri komponenty.");
 
         }
@@ -58,21 +58,27 @@ public class Pocitac {
     }
 
     public void vytvorSouborOVelikosti(long velikost) {
-        long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() + velikost;
-        if (this.jeZapnuty && vysledneVyuziteMisto < this.pevnyDisk.getKapacita())
-            this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
-        else
-            System.err.println("Nemuzes ukladat takto velky soubor, protoze se nevejde.");
+        if (jeZapnuty) {
+            long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() + velikost;
+            if (vysledneVyuziteMisto < this.pevnyDisk.getKapacita())
+                this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
+            else
+                System.err.println("Nemuzes ukladat takto velky soubor, protoze se nevejde.");
+        } else {
+            System.err.println("Pocitac neni zapnuty. Nema smysl vytvaret soubor.");
+        }
     }
 
     public void vymazSouboryOVelikosti(long velikost) {
-        long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() - velikost;
-        if (this.jeZapnuty && vysledneVyuziteMisto > 0)
-            this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
-        else
-            System.err.println("Nemuzes smazat vic mista, nez tam je.");
-
-
+        if (jeZapnuty) {
+            long vysledneVyuziteMisto = this.pevnyDisk.getVyuziteMisto() - velikost;
+            if (vysledneVyuziteMisto > 0)
+                this.pevnyDisk.setVyuziteMisto(vysledneVyuziteMisto);
+            else
+                System.err.println("Nemuzes smazat vic mista, nez tam je.");
+        } else {
+            System.err.println("Pocitac neni zapnuty. Nema smysl mazat soubor.");
+        }
     }
 
 }
